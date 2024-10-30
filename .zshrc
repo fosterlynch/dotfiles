@@ -10,6 +10,7 @@ export OPENFAAS_URL=https://openfaas.thor.crowe.com
 export PATH=$PATH:$HOME/.arkade/bin/ 
 export PATH=$PATH:/usr/lib/nvidia-cuda-toolkit/bin
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/bin/emacs27
 export LD_LIBRARY_PATH=/usr/lib/nvidia-cuda-toolkit/libdevice
 
 # Set name of the theme to load --- if set to "random", it will
@@ -82,6 +83,9 @@ unset __conda_setup
 if [[ "$OSTYPE" == linux-gnu ]]; then
     PATH="${HOME}/bin:$PATH"
 fi
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 # Trust Crowe root cert when using curl
 # see https://curl.haxx.se/docs/sslcerts.html
@@ -245,14 +249,14 @@ teds_quotes=(
 )
 ted_says=${teds_quotes[$RANDOM % ${#teds_quotes[@]} ]}
 
-if [ $(($RANDOM % 4)) -eq 0 ]; then
+if [ $(($RANDOM % 3)) -eq 0 ]; then
     cat ~/terminal_art/pika.txt | lolcat
-elif [ $(($RANDOM % 4)) -eq 1 ]; then
-    cat ~/terminal_art/zen.txt
-elif [ $(($RANDOM % 4)) -eq 2 ]; then
-    echo $ted_says | lolcat
+elif [ $(($RANDOM % 3)) -eq 1 ]; then
+    cat ~/terminal_art/livefree.txt | lolcat
 else;
-    echo "Never half ass two things, whole ass one thing" | lolcat
+    cat ~/terminal_art/ted.txt | lolcat
+    echo $ted_says | lolcat
+    # echo "Never half ass two things, whole ass one thing" | lolcat
     # cat ~/terminal_art/ron.txt | lolcat
 fi
 # cat ./terminal_art/livefree.txt | lolcat
