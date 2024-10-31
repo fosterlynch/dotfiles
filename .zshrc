@@ -10,7 +10,8 @@ export OPENFAAS_URL=https://openfaas.thor.crowe.com
 export PATH=$PATH:$HOME/.arkade/bin/ 
 export PATH=$PATH:/usr/lib/nvidia-cuda-toolkit/bin
 export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/usr/bin/emacs27
+export PATH=$PATH:/usr/bin/emacs
+export PATH=$PATH:$HOME/.emacs.d/bin
 export LD_LIBRARY_PATH=/usr/lib/nvidia-cuda-toolkit/libdevice
 
 # Set name of the theme to load --- if set to "random", it will
