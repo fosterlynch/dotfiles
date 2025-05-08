@@ -6,6 +6,7 @@ export ZSH="/home/lynchfn/.oh-my-zsh"
 # path for crowe keycloak login helper binary 
 export PATH=$PATH:$HOME/.local/bin/
 export OPENFAAS_URL=https://openfaas.thor.crowe.com
+export GL_HOST=gitlab.apollo.crowe.com
 #export OPENFAAS_URL=https://openfaas-dev.k8s.crowe.com
 export PATH=$PATH:$HOME/.arkade/bin/ 
 export PATH=$PATH:/usr/lib/nvidia-cuda-toolkit/bin
@@ -13,8 +14,11 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/usr/bin/emacs
 export PATH=$PATH:$HOME/.emacs.d/bin
 export LD_LIBRARY_PATH=/usr/lib/nvidia-cuda-toolkit/libdevice
-
-# Set name of the theme to load --- if set to "random", it will
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+#Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -86,7 +90,7 @@ if [[ "$OSTYPE" == linux-gnu ]]; then
 fi
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+# source <(fzf --zsh)
 
 # Trust Crowe root cert when using curl
 # see https://curl.haxx.se/docs/sslcerts.html
@@ -178,7 +182,7 @@ source $ZSH/oh-my-zsh.sh
 
 # adding asdf plugin manager
 . $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# . $HOME/.asdf/completions/asdf.bash
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -188,77 +192,104 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+krr() {
+  kubectl rollout restart deployment/"$1"
+  echo  "ROLLLOUT ROLLOUT ROLLOUT ROLLLOUT get out my BIZNAZZ" | lolcat
+}
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 alias ppush="echo 'personal git push' && gopass show -c gitpat && git push"
 alias ppull="echo 'personal git push' && gopass show -c gitpat && git pull"
 alias sudo="dzdo"
 alias ff="nautilus"
 alias gbr="git branch | grep -v "dev" | xargs git branch -D"
+
 # alias themechange="bash -c "$(wget -qO- https://git.io/vQgMr)""
-alias kb="kubectl"
 alias py="python3"
+alias nv="nvim ."
+
 alias snkp="conda activate py39"
 alias snkdn="conda deactivate"
+
 alias at="tmux attach"
 alias gpass="gopass show -c misc/git"
+
 # alias gpsh="export url=$(git remote show origin) && gopass show -c misc/git && git push"
-alias gpsh="gopass show -c misc/git && git push"
-alias gpll="gopass show -c misc/git && git pull"
+# alias gpsh="gopass show -c misc/git && git push"
+# alias gpll="gopass show -c misc/git && git pull"
 # alias nukeme="docker rmi -f $(docker images -aq)"
+
+alias k="kubectl"
+alias ROLLOUT="krr"
 alias kgc="kubectl config get-contexts"
 alias kswc="kubectl config use-context"
+alias ksc="kubectl config set-context --current --namespace="
+alias pods="k get pods"
+alias epod="kubectl get pods --no-headers -o custom-columns=':metadata.name' | head -n 1 | xclip -selection clipboard"
+
 alias xc="xclip -selection clipboard"
+
 alias vup="gopass show -c misc/vpass && nmcli con up id newvpn --ask"
 alias vdn="nmcli con down id newvpn"
+alias nvim-kickstart='NVIM_APPNAME="nvim_kickstart" nvim'
+
 alias infra="~/repos/mapcat-infur"
 alias email="~/repos/mapcat-openfaas-email"
 alias server="~/repos/mapcat-openfaas-server"
 # grepstuff
 # find stuff use find ~ -name <what you want to find>
 
-teds_quotes=(
-"I know folks are divided on the actual police these days, but all human beings are opposed to the laugh police",
-"Don't sell yourself short. If anything, sell yourself tall and get it altered later.",
-"I'm like an incomplete list of Madeline Kahn's best films. I ain't got no clue.",
-"You watch, from now on, I'll be floating like a butterfly and stinging like a bee. Except I won't die immediately after using my stinger.",
-"You know what my favorite thing was about Sir Isaac Newton? He was so down to Earth.",
-"Taking on a challenge is a lot like riding a horse, isn't it? If you're comfortable while you're doing it, you're probably doing it wrong.",
-"As the man once said, the harder you work, the luckier you get.",
-"I do love a locker room. It smells like potential.",
-"I always thought tea was going to taste like hot brown water. And do you know what? I was right.",
-"If that's a joke, I love it. If not, can't wait to unpack that with you later.",
-"You know what the happiest animal on Earth is? It's a goldfish. You know why? It's got a 10-second memory.",
-"If the Internet has taught us anything, it's that sometimes it's easier to speak our minds anonymously.",
-"I think that you might be so sure that you're one in a million, that sometimes you forget that out there you're just one in 11.",
-"I feel like we fell out of the lucky tree and hit every branch on the way down, ended up in a pool of cash and Sour Patch Kids.",
-"It's just a group of people who care, Roy. Not unlike folks at a hip-hop concert whose hands are not in the air.",
-"If you care about someone, and you got a little love in your heart, there ain't nothing you can't get through together.",
-"Your body is like day-old rice. If it ain't warmed up properly, something real bad could happen.",
-"Ice cream is the best. It's kinda like seeing Billy Joel perform live. Never disappoints.",
-"I promise you there is something worse out there than being sad, and that's being alone and being sad. Ain't no one in this room alone.",
-"There's two buttons I never like to hit: that's panic and snooze.",
-"I believe in Communism. Rom-communism, that is. If Tom Hanks and Meg Ryan can go through some heartfelt struggles and still end up happy, then so can we.",
-"If God would have wanted games to end in a tie, she wouldn't have invented numbers.",
-"I've never been embarrassed about having streaks in my drawers. You know, it's all part of growing up.",
-"Our goal is to go out like Willie Nelson — on a high!",
-"This woman is strong, confident, and powerful. Boss, I tell you, I'd hate to see you and Michelle Obama arm wrestle, but I wouldn't be able take my eyes off of it, either.",
-"It's kind of like back in the '80s when 'bad' meant 'good.' ",
-"You beating yourself up is like Woody Allen playing the clarinet. I don't want to hear it.",
-"I think things come into our lives to help us get from one place to a better one.",
-"When it comes to locker rooms, I like 'em just like my mother's bathing suits. I only wanna see 'em in one piece, you hear?",
-"this ones from the bathroom mirror, its the first thing i see in the morning and the last thing i see at night when i rationalize being too tired to floss."
-)
-ted_says=${teds_quotes[$RANDOM % ${#teds_quotes[@]} ]}
+alias livefree="cat ~/terminal_art/livefree.txt | lolcat"
 
-if [ $(($RANDOM % 3)) -eq 0 ]; then
-    cat ~/terminal_art/pika.txt | lolcat
-elif [ $(($RANDOM % 3)) -eq 1 ]; then
-    cat ~/terminal_art/livefree.txt | lolcat
-else;
+ted(){
+    teds_quotes=(
+        "I know folks are divided on the actual police these days, but all human beings are opposed to the laugh police",
+        "Don't sell yourself short. If anything, sell yourself tall and get it altered later.",
+        "I'm like an incomplete list of Madeline Kahn's best films. I ain't got no clue.",
+        "You watch, from now on, I'll be floating like a butterfly and stinging like a bee. Except I won't die immediately after using my stinger.",
+        "You know what my favorite thing was about Sir Isaac Newton? He was so down to Earth.",
+        "Taking on a challenge is a lot like riding a horse, isn't it? If you're comfortable while you're doing it, you're probably doing it wrong.",
+        "As the man once said, the harder you work, the luckier you get.",
+        "I do love a locker room. It smells like potential.",
+        "I always thought tea was going to taste like hot brown water. And do you know what? I was right.",
+        "If that's a joke, I love it. If not, can't wait to unpack that with you later.",
+        "You know what the happiest animal on Earth is? It's a goldfish. You know why? It's got a 10-second memory.",
+        "If the Internet has taught us anything, it's that sometimes it's easier to speak our minds anonymously.",
+        "I think that you might be so sure that you're one in a million, that sometimes you forget that out there you're just one in 11.",
+        "I feel like we fell out of the lucky tree and hit every branch on the way down, ended up in a pool of cash and Sour Patch Kids.",
+        "It's just a group of people who care, Roy. Not unlike folks at a hip-hop concert whose hands are not in the air.",
+        "If you care about someone, and you got a little love in your heart, there ain't nothing you can't get through together.",
+        "Your body is like day-old rice. If it ain't warmed up properly, something real bad could happen.",
+        "Ice cream is the best. It's kinda like seeing Billy Joel perform live. Never disappoints.",
+        "I promise you there is something worse out there than being sad, and that's being alone and being sad. Ain't no one in this room alone.",
+        "There's two buttons I never like to hit: that's panic and snooze.",
+        "I believe in Communism. Rom-communism, that is. If Tom Hanks and Meg Ryan can go through some heartfelt struggles and still end up happy, then so can we.",
+        "If God would have wanted games to end in a tie, she wouldn't have invented numbers.",
+        "I've never been embarrassed about having streaks in my drawers. You know, it's all part of growing up.",
+        "Our goal is to go out like Willie Nelson — on a high!",
+        "This woman is strong, confident, and powerful. Boss, I tell you, I'd hate to see you and Michelle Obama arm wrestle, but I wouldn't be able take my eyes off of it, either.",
+        "It's kind of like back in the '80s when 'bad' meant 'good.' ",
+        "You beating yourself up is like Woody Allen playing the clarinet. I don't want to hear it.",
+        "I think things come into our lives to help us get from one place to a better one.",
+        "When it comes to locker rooms, I like 'em just like my mother's bathing suits. I only wanna see 'em in one piece, you hear?",
+        "this ones from the bathroom mirror, its the first thing i see in the morning and the last thing i see at night when i rationalize being too tired to floss."
+    )
+    ted_says=${teds_quotes[$RANDOM % ${#teds_quotes[@]} ]}
     cat ~/terminal_art/ted.txt | lolcat
     echo $ted_says | lolcat
-    # echo "Never half ass two things, whole ass one thing" | lolcat
-    # cat ~/terminal_art/ron.txt | lolcat
-fi
+}
+
+# pikachu will be now and forever
+cat ~/terminal_art/pika.txt | lolcat
+
+
+
+# randomize terminal art
+# if [ $(($RANDOM % 3)) -eq 0 ]; then
+#     cat ~/terminal_art/pika.txt | lolcat
+# elif [ $(($RANDOM % 3)) -eq 1 ]; then
+# else;
+#     # echo "Never half ass two things, whole ass one thing" | lolcat
+#     # cat ~/terminal_art/ron.txt | lolcat
+# fi
 # cat ./terminal_art/livefree.txt | lolcat
 # cat ~/terminal_art/pika.txt | lolcat 
