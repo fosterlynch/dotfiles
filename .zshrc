@@ -5,7 +5,7 @@
 export ZSH="/home/lynchfn/.oh-my-zsh"
 # path for crowe keycloak login helper binary 
 export PATH=$PATH:$HOME/.local/bin/
-export OPENFAAS_URL=https://openfaas.thor.crowe.com
+export OPENFAAS_URL=https://openfaas-dev.k8s.crowe.com
 export GL_HOST=gitlab.apollo.crowe.com
 #export OPENFAAS_URL=https://openfaas-dev.k8s.crowe.com
 export PATH=$PATH:$HOME/.arkade/bin/ 
