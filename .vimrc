@@ -1,4 +1,4 @@
-
+"" this is how you write a comment
 set incsearch
 set hlsearch
 set ignorecase
@@ -9,8 +9,10 @@ set relativenumber
 :imap qw <Esc>
 :nnoremap asd :w
 :nnoremap zxc :q
-
+:nnoremap cxz :q!
 set timeoutlen=500
 
 set title
-set termguicolors
+:syn on
+"" :colorscheme solarized8_dark
+"" set termguicolors
