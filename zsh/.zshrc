@@ -15,7 +15,7 @@ ZSH_THEME="wuffers"
 # promptinit
 # prompt -l
 # prompt suse
-
+unset zle_bracketed_paste
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -73,6 +73,11 @@ if [[ "$OSTYPE" == linux-gnu ]]; then
     PATH="${HOME}/bin:$PATH"
 fi
 
+# Trust Crowe root cert when using curl
+# see https://curl.haxx.se/docs/sslcerts.html
+export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -133,8 +138,11 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git, python)
-
+# plugins=(zsh-autosuggestions)
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#525252' 
 source $ZSH/oh-my-zsh.sh
+
+[ -f "/home/lynchfn/.ghcup/env" ] && source "/home/lynchfn/.ghcup/env" # ghcup-env
 
 # User configuration
 
@@ -153,6 +161,10 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# adding asdf plugin manager
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -161,10 +173,29 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ppush="echo 'personal git push' && gopass show -c gitpat && git push"
+alias ppull="echo 'personal git push' && gopass show -c gitpat && git pull"
 alias sudo="dzdo"
+alias ff="nautilus"
 alias gbr="git branch | grep -v "dev" | xargs git branch -D"
 # alias themechange="bash -c "$(wget -qO- https://git.io/vQgMr)""
 alias kb="kubectl"
 alias py="python3"
+alias snkp="conda activate py39"
+alias snkdn="conda deactivate"
+alias at="tmux attach"
+alias gpass="gopass show -c misc/git"
+# alias gpsh="export url=$(git remote show origin) && gopass show -c misc/git && git push"
+alias gpsh="gopass show -c misc/git && git push"
+alias gpll="gopass show -c misc/git && git pull"
+# alias nukeme="docker rmi -f $(docker images -aq)"
+alias kgc="kubectl config get-contexts"
+alias kswc="kubectl config use-context"
+alias vup="gopass show -c misc/vpass && nmcli con up id newvpn --ask"
+alias vdn="nmcli con down id newvpn"
+alias peachy="cd ~/repos/cida-peachy"
+alias cidaservice="cd ~/repos/cida-service"
+alias sandbox="cd ~/repos/sandbox"
+cat ./terminal_art/livefree.txt | lolcat
+# cat ~/terminal_art/pika.txt | lolcat 
 
-# cat ./terminal_art/007.txt
