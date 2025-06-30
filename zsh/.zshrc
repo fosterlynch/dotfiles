@@ -196,6 +196,6 @@ alias vdn="nmcli con down id newvpn"
 alias peachy="cd ~/repos/cida-peachy"
 alias cidaservice="cd ~/repos/cida-service"
 alias sandbox="cd ~/repos/sandbox"
-cat ./terminal_art/livefree.txt | lolcat
-# cat ~/terminal_art/pika.txt | lolcat 
+# cat ./terminal_art/livefree.txt | lolcat
+cat ~/terminal_art/pika.txt | lolcat 
 
