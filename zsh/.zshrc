@@ -212,7 +212,8 @@ alias snkdn="conda deactivate"
 
 alias at="tmux attach"
 alias gpass="gopass show -c misc/git"
-
+alias pull="git pull"
+alias push="git push"
 # alias gpsh="export url=$(git remote show origin) && gopass show -c misc/git && git push"
 # alias gpsh="gopass show -c misc/git && git push"
 # alias gpll="gopass show -c misc/git && git pull"

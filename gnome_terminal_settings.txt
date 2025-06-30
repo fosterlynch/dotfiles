@@ -1,0 +1,8 @@
+[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(46,52,54)'
+default-size-columns=160
+default-size-rows=48
+foreground-color='rgb(211,215,207)'
+use-theme-colors=false
+use-theme-transparency=true

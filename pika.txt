@@ -1,1 +1,0 @@
-terminal_art/pika.txt
