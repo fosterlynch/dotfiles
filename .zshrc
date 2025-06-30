@@ -3,6 +3,14 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/lynchfn/.oh-my-zsh"
+# path for crowe keycloak login helper binary 
+export PATH=$PATH:$HOME/.local/bin/
+export OPENFAAS_URL=https://openfaas.thor.crowe.com
+#export OPENFAAS_URL=https://openfaas-dev.k8s.crowe.com
+export PATH=$PATH:$HOME/.arkade/bin/ 
+export PATH=$PATH:/usr/lib/nvidia-cuda-toolkit/bin
+export PATH=$PATH:/usr/local/go/bin
+export LD_LIBRARY_PATH=/usr/lib/nvidia-cuda-toolkit/libdevice
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -20,7 +28,7 @@ setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
-
+# export $EDITOR="vim" 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 # this allows you to get old commands or scroll up in a new terminal
 HISTSIZE=1000
@@ -48,7 +56,9 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
 # uncomment if you want descriptions of available commands in complete
 # zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 # zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
@@ -138,7 +148,7 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git, python)
-# plugins=(zsh-autosuggestions)
+plugins=(zsh-syntax-highlighting)
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#525252' 
 source $ZSH/oh-my-zsh.sh
 
@@ -173,6 +183,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 alias ppush="echo 'personal git push' && gopass show -c gitpat && git push"
 alias ppull="echo 'personal git push' && gopass show -c gitpat && git pull"
 alias sudo="dzdo"
@@ -191,11 +202,22 @@ alias gpll="gopass show -c misc/git && git pull"
 # alias nukeme="docker rmi -f $(docker images -aq)"
 alias kgc="kubectl config get-contexts"
 alias kswc="kubectl config use-context"
+alias xc="xclip -selection clipboard"
 alias vup="gopass show -c misc/vpass && nmcli con up id newvpn --ask"
 alias vdn="nmcli con down id newvpn"
-alias peachy="cd ~/repos/cida-peachy"
-alias cidaservice="cd ~/repos/cida-service"
-alias sandbox="cd ~/repos/sandbox"
+alias infra="~/repos/mapcat-infur"
+alias email="~/repos/mapcat-openfaas-email"
+alias server="~/repos/mapcat-openfaas-server"
+# grepstuff
+# find stuff use find ~ -name <what you want to find>
+if [ $(($RANDOM % 3)) -eq 0 ]; then
+    cat ~/terminal_art/pika.txt | lolcat
+elif [ $(($RANDOM % 3)) -eq 1 ]; then
+    cat ~/terminal_art/zen.txt
+else;
+    echo "Never half ass two things, whole ass one thing" | lolcat
+    # cat ~/terminal_art/ron.txt | lolcat
+fi
 # cat ./terminal_art/livefree.txt | lolcat
-cat ~/terminal_art/pika.txt | lolcat 
-
+# cat ~/terminal_art/pika.txt | lolcat 
+tmux attach-session
