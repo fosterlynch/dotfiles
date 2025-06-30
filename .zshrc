@@ -210,14 +210,50 @@ alias email="~/repos/mapcat-openfaas-email"
 alias server="~/repos/mapcat-openfaas-server"
 # grepstuff
 # find stuff use find ~ -name <what you want to find>
-if [ $(($RANDOM % 3)) -eq 0 ]; then
+
+teds_quotes=(
+"I know folks are divided on the actual police these days, but all human beings are opposed to the laugh police",
+"Don't sell yourself short. If anything, sell yourself tall and get it altered later.",
+"I'm like an incomplete list of Madeline Kahn's best films. I ain't got no clue.",
+"You watch, from now on, I'll be floating like a butterfly and stinging like a bee. Except I won't die immediately after using my stinger.",
+"You know what my favorite thing was about Sir Isaac Newton? He was so down to Earth.",
+"Taking on a challenge is a lot like riding a horse, isn't it? If you're comfortable while you're doing it, you're probably doing it wrong.",
+"As the man once said, the harder you work, the luckier you get.",
+"I do love a locker room. It smells like potential.",
+"I always thought tea was going to taste like hot brown water. And do you know what? I was right.",
+"If that's a joke, I love it. If not, can't wait to unpack that with you later.",
+"You know what the happiest animal on Earth is? It's a goldfish. You know why? It's got a 10-second memory.",
+"If the Internet has taught us anything, it's that sometimes it's easier to speak our minds anonymously.",
+"I think that you might be so sure that you're one in a million, that sometimes you forget that out there you're just one in 11.",
+"I feel like we fell out of the lucky tree and hit every branch on the way down, ended up in a pool of cash and Sour Patch Kids.",
+"It's just a group of people who care, Roy. Not unlike folks at a hip-hop concert whose hands are not in the air.",
+"If you care about someone, and you got a little love in your heart, there ain't nothing you can't get through together.",
+"Your body is like day-old rice. If it ain't warmed up properly, something real bad could happen.",
+"Ice cream is the best. It's kinda like seeing Billy Joel perform live. Never disappoints.",
+"I promise you there is something worse out there than being sad, and that's being alone and being sad. Ain't no one in this room alone.",
+"There's two buttons I never like to hit: that's panic and snooze.",
+"I believe in Communism. Rom-communism, that is. If Tom Hanks and Meg Ryan can go through some heartfelt struggles and still end up happy, then so can we.",
+"If God would have wanted games to end in a tie, she wouldn't have invented numbers.",
+"I've never been embarrassed about having streaks in my drawers. You know, it's all part of growing up.",
+"Our goal is to go out like Willie Nelson — on a high!",
+"This woman is strong, confident, and powerful. Boss, I tell you, I'd hate to see you and Michelle Obama arm wrestle, but I wouldn't be able take my eyes off of it, either.",
+"It's kind of like back in the '80s when 'bad' meant 'good.' ",
+"You beating yourself up is like Woody Allen playing the clarinet. I don't want to hear it.",
+"I think things come into our lives to help us get from one place to a better one.",
+"When it comes to locker rooms, I like 'em just like my mother's bathing suits. I only wanna see 'em in one piece, you hear?",
+"this ones from the bathroom mirror, its the first thing i see in the morning and the last thing i see at night when i rationalize being too tired to floss."
+)
+ted_says=${teds_quotes[$RANDOM % ${#teds_quotes[@]} ]}
+
+if [ $(($RANDOM % 4)) -eq 0 ]; then
     cat ~/terminal_art/pika.txt | lolcat
-elif [ $(($RANDOM % 3)) -eq 1 ]; then
+elif [ $(($RANDOM % 4)) -eq 1 ]; then
     cat ~/terminal_art/zen.txt
+elif [ $(($RANDOM % 4)) -eq 2 ]; then
+    echo $ted_says | lolcat
 else;
     echo "Never half ass two things, whole ass one thing" | lolcat
     # cat ~/terminal_art/ron.txt | lolcat
 fi
 # cat ./terminal_art/livefree.txt | lolcat
 # cat ~/terminal_art/pika.txt | lolcat 
-tmux attach-session
