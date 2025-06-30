@@ -1,0 +1,21 @@
+[/]
+foreground-color='rgb(255,255,255)'
+highlight-foreground-color='rgb(148,163,165)'
+scrollbar-policy='never'
+palette=['rgb(68,71,90)', 'rgb(255,85,85)', 'rgb(255,184,108)', 'rgb(108,255,112)', 'rgb(139,233,253)', 'rgb(189,147,249)', 'rgb(10,255,225)', 'rgb(148,163,165)', 'rgb(0,0,0)', 'rgb(255,85,85)', 'rgb(255,184,108)', 'rgb(108,255,112)', 'rgb(139,233,253)', 'rgb(189,147,249)', 'rgb(255,255,255)', 'rgb(255,255,255)']
+bold-is-bright=false
+visible-name='Dracula (Copy)'
+custom-command='zsh'
+cursor-colors-set=false
+highlight-colors-set=true
+use-theme-colors=false
+use-custom-command=true
+use-theme-transparency=false
+use-transparent-background=true
+allow-bold=true
+bold-color-same-as-fg=true
+bold-color='#9494A3A3A5A5'
+background-color='#28282a2a3636'
+background-transparency-percent=20
+highlight-background-color='#'
+audible-bell=false
